@@ -1,0 +1,40 @@
+\chapter{Begriffe, Basisdefinitionen}
+\section{Kryptologie}
+Kryptologie umfasst:
+\begin{itemize}
+    \item Kryptographie (Ver- und Entschlüsselung)
+    \item Kryptoanalyse (Analyse der Sicherheit)
+\end{itemize}
+
+\section{Klassische/Symmetrische Kryptographie}
+\begin{itemize}
+    \item $m$: Nachricht (\textit{Message})
+    \item $k$: Schlüssel (\textit{Key})
+    \item $c=E(m,k)$: Chiffre ($E \hat{=}$ \textit{Encrypt}) 
+    \item $m=D(c,k)$: Entschlüsselte Nachricht ($D \hat{=}$ \textit{Decrypt})
+\end{itemize}
+$E$ muss injektiv bezüglich des ersten Arguments sein um Entschlüsselung zu ermöglichen (unterschiedliche Chiffren).
+Der Schlüsseltausch ist nicht spezifiziert und muss extern geschehen.
+
+\section{Transpositions- und Substitutionschiffren}
+Bei Transpositionschiffren bleiben die Buchstaveb unverändert, nur ihre Reihenfolge wird verändert.
+
+\section{Monoalphabetischechiffren}
+Bei Monoalphabetischen Chiffren wird jedes Quellen Symbol fest auf ein anderes Symbol abgebildet.
+
+\section{Polyalphabetischechiffren}
+Es wird Buchstabenweise ersetzt, die Abbildung ändert sich jedoch nach einem festgelegten Schema.
+
+\section{Blockchiffren}
+Blöcke fester Länge werden in Chiffrenblöcke abgebildet.
+
+\section{Lawineneffekt}
+Wünschenswert ist das bereits kleine Änderungen am Klartext große Änderungen an der Chiffre hervorrufen.
+Monoalphabetischesubstitutionschiffren und Substitutionschiffren erfüllen diese Anforderung nicht.
+
+\section{Moderne/Asymmetrische Kryptographie}
+Der Empfänger erzeugt zwei Schlüssel, den öffentlichen Schlüssel $k$ und den privaten Schlüssel $k'$. 
+Es gilt: $E(m, k) = c$ und $D(c, k') = m$, außerdem soll es für einen
+Angreifer nicht möglich sein $k'$ aus $k$ zu berechnen.
+Hier ist also kein Schlüsseltausch notwendig.
+
