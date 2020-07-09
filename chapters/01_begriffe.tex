@@ -38,3 +38,36 @@ Es gilt: $E(m, k) = c$ und $D(c, k') = m$, außerdem soll es für einen
 Angreifer nicht möglich sein $k'$ aus $k$ zu berechnen.
 Hier ist also kein Schlüsseltausch notwendig.
 
+\section{Algorithmen, Protokolle und Runden}
+Ein Algorithmus beschreibt die Berechnung eines Wertes aus anderen Werten, hierbei kann ein Algorithmus deterministisch oder auch probabilistisch sein.
+Ein Protokoll spezifiert den Nachrichtenaustausch, wenn mehrfach (verschiedene) Nachrichten versendet werden, so spricht man von Runden.
+
+\section{Hybride Kryptosysteme}
+Da asymmetrische Kryptographie einen höheren Aufwand (circa $\mathcal{O}(n^3)$) im 
+Vergleich zu symmetrischen Verfahren (circa $\mathcal{O}(n)$) hat werden symmetrische
+und asymmetrische Verfahren kombiniert. Für den Schlüsseltausch werden asymmetrische
+Verfahren verwendet, die eigentliche Kommunikation nutzt symmetrische Verfahren.
+
+\section{Angriffsszenarien}
+\begin{itemize}
+    \item
+        \textbf{Cyphertext-only:} Angreifer kennt nur $c$ und soll $m$ (und eventuell auch $k$) ermitteln
+    \item 
+        \textbf{Known-Plaintext:} Angreifer kennt $(m, c)$ (evtl. mehrere) und soll $k$ ermitteln
+    \item
+        \textbf{Chosen-Plaintext:} Angreifer kann $c=E(m, k)$ für beliebiges $m$ berechnen und soll daraus $k$ bestimmen
+    \item
+        \textbf{Chosen-Cyphertext:} Angreifer kann $m=D(c,k)$ für beliebiges $c$ berechnen und soll daraus $k$ bestimmen
+    \item
+        \textbf{Man-in-the-middle:} Angreifer kann Nachrichten zwischen Alice und Bob verändern oder austauschen.
+        Ohne zusätzliche Authentisierung ist ein solcher Angriff nicht vermeidbar.
+\end{itemize}
+
+\section{Kerckhoff-Prinzip}
+Die Sicherheit eines Verfahrens sollte auf der Geheimhaltung der Schlüssel und nicht des
+Verfahrens basieren.
+
+\section{Sicherheitsniveau}
+Das Sicherheitsniveau vergleicht ein Verfahren mit einem äquivalenten, nur durch Brute-Force lösbaren Verfahren mit Schlüssellänge $n$. Das heißt bei zweiteren Verfahren müssen
+genau $2^n$ Schlüssel probiert werden, bei einem Verfahren mit Sicherheitsniveau $n$ ist
+der Aufwand genauso groß.

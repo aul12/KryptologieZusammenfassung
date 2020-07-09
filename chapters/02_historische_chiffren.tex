@@ -1,0 +1,64 @@
+\chapter{Historische Chiffren}
+\section{Cäsar-Chiffre}
+Einfache Substitutionschiffre, bei der jeder (numerische) Buchstabenwert um ein gewisses Offset verschoben wird.
+
+\section{Affine Chiffre}
+Der Schlüssel besteht aus zwei Zahlen $k=(a,b)$, verschlüsselt wird durch:
+\begin{equation}
+    c= a \cdot m + b \mod 26
+\end{equation}
+Für die injektivität muss aber gelten $\text{ggT}(a, 26) = 1$.
+
+\section{Allgemeine monoalphabetische Chiffrierung}
+Jeder der 26 Buchstaben kann auf einen anderen Buchstaben abgebildet werden. Es existieren somit $26! \approx 2^{88}$ Schlüssel. Das Sicherheitsniveau kann trotzdem nicht gegeben sein, wenn z.B. Buchstabenhäufigkeiten ausgenutzt werden können.
+
+\section{Buchstabenhäufigkeiten im Deutschen}
+\subsection{Einzelbuchstaben}
+Grobe Reihenfolge: E (17\%), N (10\%), I, R, S, T, A (jeweils circa $6-7\%$).
+
+\subsection{Buchstaben-Paare (Bigramme)}
+Häufig sind: ER, EN, CH, DE, EI, ND, TE, IN, IE.
+G
+\section{Homophone Chiffrierung}
+Ein Quellensymbol wird auf mehrere anderes Symbole zufällig abgebildet, die Anzahl der
+jeweiligen Codesymbole ist proportional zur Wahrscheinlichkeit.
+Dadurch wird eine Gleichverteilung von Codewörtern erreicht.
+Immer noch angreifbar über Bi- und Trigramme.
+
+\section{Playfair-Chiffre}
+Es werden Bigramme auf Bigramme abgebildet. Doppelte Buchstaben sollten vermieden werden,
+z.B. durch Streichen der Dopplung oder Einfügen eines Füllbuchstabens. Außerdem wird der
+Buchstabe J durch I ersetzt.
+
+Das Schlüsselwort hat meistens die Länge 5 und sollte keine doppelt vorkommendende 
+Buchstaben haben. Es wird eine $5 \times 5$ Tabelle reihenweise aufgefüllt, hierfür
+wird mit dem Schlüsselwort angefangen und dann nachfolgend das (modifizierte) Alphabet
+eingetragen wobei Buchstaben die bereits Teil des Schlüsselwortes sind ausgelassen werden.
+
+Das Verschlüsseln erfolgt auf Basis der Tabelle:
+\begin{itemize}
+    \item Wenn beide Buchstaben in der selben Zeile oder Spalte liegen, dann werden 
+        jeweils die nachfolgenden Buchstaben (in Zeile bzw. Spalte) zyklisch ausgewählt.
+    \item Sonst bilden die Buchstaben die Ecken eines Rechtecks, es werden im Uhrzeigersinn
+          die anderen Buchstab des Rechtecks ausgewählt.
+\end{itemize}
+
+Auch dieses Verfahren ist über Bi- und Trigramme angreifbar.
+
+\section{Vigenère-Chiffre}
+Man wählt ein Schlüsselwort, welches fortlaufend über den Klartext geschrieben wird, dann wird Buchstabenweise-Caesar verschlüsselt.
+
+\subsection{Kasiski}
+Mehrfachvorkommen von Trigrammen finden und deren Differenzen finden. 
+Die wahrscheinliche Schlüssellänge ist dann der ggT aller Differenzen.
+Dann können die einzelnen Caesar-Chiffren über die Buchstabenhäufigkeiten geknackt werden.
+
+\section{Autokey-Chiffre}
+\subsection{Variante 1}
+Modifikation der Vigenère-Chiffre bei der statt dem wiederholten Schlüsselwort der letzte verschlüsselte Block verwendet wird.
+
+\subsection{Variante 2}
+Modifikation der Vigenère-Chiffre bei der statt dem wiederholten Schlüsselwort der letzte Klartext-Block verwendet wird.
+
+Beide Verfahren sind ebenfalls unsicher.
+
