@@ -1,0 +1,34 @@
+\chapter{Koinzidenzindex und Friedman-Methode}
+\section{Koinzidenzindex}
+Sei $p=(p_1, p_2, \ldots p_k)$ eine Wahrscheinlichkeitsverteilung. Dann ist
+der Koinzidenzindex IC definiert als:
+\begin{equation}
+    \text{IC}(p) = \sum_{i=1}^k p_i 
+\end{equation}
+Alternativ: wenn $X$ und $Y$ zwei Zufallsvariablen mit Verteilung nach $p$ sind, so gilt:
+\begin{equation}
+    \text{IC}(p) = P(X=Y)
+\end{equation}
+
+\section{Renyi-Entropie}
+Die Renyi-Entropie ist definiert als:
+\begin{equation}
+    \text{R}(p) = -\log_2(\text{IC}(p))
+\end{equation}
+
+\section{Schätzung des Koinzidenzindex}
+Eine Schätzung des Koinzidenzindex erhält man durch ($a$ sind die Zeichen des Alphabets,
+$n(a)$ deren Häufigkeit, $m$ ist die Textlänge):
+\begin{equation}
+    \tilde{\text{IC}} = \sum_a \frac{n(a) \cdot (n(a) - 1)}{m \cdot (m-1)}
+\end{equation}
+
+\section{Friedman-Methode zum Knacken von Vigenère}
+Aus der Schlüssellänge $l$ berechnet sich der Koinzidenzindex wie folgt (bei deutscher Sprache):
+\begin{equation}
+    \tilde{\text{IC}} = \frac{1}{l} 7.6\% + \frac{l-1}{l} 3.85\%
+\end{equation}
+Auflösen nach $l$ ergibt:
+\begin{equation}
+    l \approx \frac{3.75\%}{\hat{\text{IC}} - 3.85\%}
+\end{equation}
