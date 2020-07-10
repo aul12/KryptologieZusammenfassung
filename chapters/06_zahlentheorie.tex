@@ -1,0 +1,84 @@
+\chapter{Einige zahlentheoretische Fakten}
+\section{Gruppen und Körper}
+Die Menge $\mathbb{Z}_n = \{0, 1, \ldots, n-1\}$ ist bezüglich der modularen Addition eine abelsche Gruppe. 
+Wenn $n$ Primzahl ist, dann ist $\mathbb{Z}_n$ ein Körper.
+
+Die Menge $\mathbb{Z}_n^* = \{a | 1 \leq a \leq n-1, \text{ggT}(a, n) = 1\}$ ist bezüglich
+der modularen Multiplikation eine abelsche Gruppe. 
+
+\section{Euler-Funktion}
+Für eine Zahl $n$ mit Primfaktorzerlegung $n= \prod_{i=1}^k {(p_i)}^{e_i}$ gilt:
+\begin{equation}
+    \varphi(n) = \prod_{i=1}^k (p_i -1 ) {(p_i)}^{e_i-1}
+        = n \cdot \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right)
+\end{equation}
+Anschaulich ist $\phi(n)$ die Anzahl der Teilerfremden Zahlen zu $n$ (kleiner $n$).
+
+Es gilt:
+\begin{itemize}
+    \item $n$ Primzahl $\Rightarrow \varphi(n) = n-1$
+    \item $m, n$ Teilerfremd $\Rightarrow \varphi(m \cdot n) = \varphi(m) \cdot \varphi(n)$
+    \item Für $n \geq 5$: $\varphi(n) \geq \frac{n}{6 \cdot \log(\log(n))}$
+\end{itemize}
+
+\section{Primzahlsatz}
+Die Zahl der Primzahlen bis $n$ verhält sich asymptotisch wie $\frac{n}{\log(n)}$.
+
+\section{Satz von Euler/Fermat}
+Falls $a \in G$ mit $G$ einer Gruppe, so ist $a^{\abs{G}} = 1$.
+
+Das kleinste $k$ mit $a^{k} = 1$ ist Ordnung von $a$ in $G$.
+
+\section{Zyklische Gruppen, Primitivwurzeln}
+$G$ heißt zyklisch, falls es ein $a \in G$ gibt, so dass $a^1, a^2, \ldots a^{\abs{G}}$
+alle Elemente der Gruppe durchläuft. Solch ein Element heißt Erzeuger der Gruppe
+oder auch Primitivwurzel.
+
+Eine Gruppe ist zyklisch falls $n = 1, 2, 4, p^k, 2\cdot p^k$ mit $p$ einer ungeraden
+Primzahl und $k \in \mathbb{N}$.
+
+Falls eine Gruppe zyklisch ist so existieren $\phi(\phi(n))$ Primitivwurzeln.
+
+Allgemein ist $<a> = \{a, \ldots, a^{\abs{G}}\}$ eine Untergruppe von $G$, 
+$\abs{<a>}$ ist die Ordnung von $a$.
+
+\section{Exponentiation und diskreter Logarithmus}
+Sei $\mathbb{Z}_n^*$ eine zyklische Gruppe und $a$ Primitivwurzel, dann existiert
+für jedes $x \in \mathbb{Z}_n^*$ ein eindeutiger Exponent $k$ mit $a^k = x$.
+Dieser Exponent ist der diskrete Exponent von $x$ (zur Basis $a$).
+
+\section{Ver- und Entschlüsseln durch Potenzieren}
+Für die Nachricht $m < n$, $c=m^e \mod n$. Mit $e$ beliebig, Teilerfremd zu $\phi(n)$
+und $d = e^{-1} \mod \varphi(n)$ so gilt $c^d \mod n = m$.
+
+\section{Chinesischer Restsatz}
+Gegeben paarweise teilerfremde Zahlen $n_1, \ldots n_k$ sowie $a_1 \in \mathbb{Z}_{n_1}, \ldots, a_k \in \mathbb{Z}_{n_k}$.
+Es gilt $n=\prod_i n_i$.
+Gesucht ist die Lösung für des Kongruenzgleichungssystem:
+\begin{eqnarray}
+    x &\equiv& a_1 \mod n_1 \\
+    &\vdots& \\
+    x &\equiv& a_k \mod n_k \\
+\end{eqnarray}
+Es existiert eine Lösung $x$ die eindeutig $\mod n$ ist.
+
+Das heißt es existiert eine (bijektive) Abbildung zwischen $\mathbb{Z}_{n_1} \times \cdots \times \mathbb{Z}_{n_k}$.
+
+\section{Rechenoperationen mit dem Chinesischen Restsatz}
+$(a_1, \ldots, a_k), x$ sowie $(b_1, \ldots b_k), y$ seien zwei Kongruenzgleichungssysteme
+mit selben $n_i$.
+Dann gilt für eine Grundrechenart $\Diamond$:
+\begin{equation}
+    (a_1 \Diamond b_1, \ldots a_k \Diamond b_k), x \Diamond y
+\end{equation}
+ist ebenfalls ein Kongruenzgleichungssystem.
+
+\section{Quadratische Reste, Euler-Kriterium}
+Das Euler Kriterium zeigt an ob für ein $x$ ein Quadratischer Rest existiert, also ob ein
+$y$ mit $y^2 \equiv x \mod n$ existiert. 
+Dies ist genau dann der Fall, falls
+\begin{equation}
+    x^{\frac{n-1}{2}} \equiv 1 \mod n
+\end{equation}
+Bei nicht Primzahlen hat jeder quadratische Rest mindestens $4$ Primzahlen.
+
