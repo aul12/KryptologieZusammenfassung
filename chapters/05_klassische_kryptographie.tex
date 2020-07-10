@@ -1,0 +1,52 @@
+\chapter{Klassische Kryptographie}
+\section{Pseudozufallsgeneratoren, rückgekoppelte Schieberegister}
+Der Ansatz eines One-Time-Pad ist in den meisten Anwendungen praktisch nicht realisierbar.
+Daher wird ein Verfahren benötigt, dass einen Schlüssel vergrößert, dieses Verfahren
+ist nicht absolut sicher, kann aber ein beliebiges Sicherheitsniveau erreichen.
+
+Mögliche Verfahren:
+\begin{itemize}
+    \item Linearer Kongruenzgenerator:
+        \begin{equation}
+            z_{i+1} = (a \cdot z_i + b) \mod n
+        \end{equation}
+        für eine maximale Periode muss gelten: $b, n$ teilerfremd, $a \equiv 1 \mod p$ für alle Primteiler $p$ von $n$. Falls $n$ durch $4$ teilbar ist muss auch $a \equiv 1 \mod 4$ gelten.
+    \item Polynome höheren Grades, z.B.:
+        \begin{equation}
+            z_{i+1} = a \cdot z_i^2 + b \cdot z_i + c \mod n
+        \end{equation} 
+    \item Blum-Blum-Shub-Generator: wähle Primzahlen $p, q$, $n=p\cdot q$        
+        \begin{equation}
+            z_{i+1} = z_i^2 \mod n
+        \end{equation}
+    \item Rückgekoppelte Schieberegister: 
+        Die Ausgabe des Schieberegisters wird mit anderen Zuständen (XOr-) Verknüpft,
+        bei jedem Taktzyklus ändert sich der Zustand. Für $n$ Zustände erreicht man eine
+        maximale Periode von $2^n-1$ ($0$ ist kein möglicher Zustand). Verbesserte
+        Sicherheit bei Verknüpfung von mehreren Schieberegistern unterschiedlicher
+        Länge.
+\end{itemize}
+
+\section{Feistel-Netzwerk, DES}
+Netzwerk mit mehreren Runden, DES unsicher, da Schlüssel zu kurz.
+
+Aus dem Schlüssel $K$ werden $n$ Rundenschlüssel generiert. Die Nachricht wird in zwei
+gleich lange Blöcke aufgeteilt $m=(L_0, R_0)$. Dann werden $n$ Rundendurchlaufen, wobei
+jeweil $(L_{i+1}, R_{i+1})$ aus $(L_i, R_i)$ und $K_i$ berechnet werden. Die verschlüsselte
+Nachricht ist $(L_n, R_n)$.
+
+Die Berechnung erfolgt durch (die Bestimmung von $f$ und $K$ wird nicht behandelt):
+\begin{eqnarray}
+    L_i &=& R_{i-1} \\
+    R_i &=& L_{i-1} \oplus f_i(R_{i-1}, K_i)
+\end{eqnarray}
+die Dechiffrierung erfolgt durch das selbe Schema in umgedrehter Richtung.
+
+\section{Modulares Potenzieren}
+Es wird eine Primzahl $n$ benötigt sowie ein $e$ mit $\text{ggT}(n-1, e) = 1$. Damit kann
+das $d$ mit $e \cdot d \equiv 1 \mod n-1$ berechnet werden.
+Für die Verschlüsselung gilt:
+\begin{eqnarray}
+    c &=& m^e \mod n \\
+    m &=& c^d \mod n \\
+\end{eqnarray}
