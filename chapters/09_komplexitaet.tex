@@ -1,0 +1,33 @@
+\chapter{P, NP, Einwegfunktionen und Orakel}
+\section{Die Klasse P}
+Umfasst alle algorithmischen Aufgabenstellungen für die es einen (deterministischen)
+Algorithmus gobt, dessen Rechnezeit als Funktion der Eingabelänge polynomial ist.
+
+Polynomial wird vereinfacht auch als effizient berechenbar bezeichnet.
+
+\section{NP und NP-vollständig}
+Die Klasse NP ist für Entscheidungsprobleme definiert: Wir können das
+Problem selber im Allgemeinen nicht in polynomialer Zeit lösen, können
+aber in polynomialer Zeit bestimmen ob eine gegebene Lösung korrekt ist.
+
+NP vollständige Probleme sind solche für die (wahrscheinlich) keine
+polynomiale Lösung existiert.
+
+\section{Einwegfunktionen}
+Eine Einwegfunktion ist eine Fumktion, welche nur in Vorwärtsrichtung effizient
+berechenbar ist:
+\begin{equation}
+    f \in \text{P aber } f^{-1} \notin \text{P}
+\end{equation}
+Bei nicht-injektiven Funktionen (z.B. Hashfunktionen) soll kein $x = f^{-1}(y)$ effizient
+berechnet werden können.
+
+In der Kryptographie soll außerdem die Umkehrfunktion auch nicht mit probabilitistischen
+Algorithmen effizient zu berechnen sein.
+
+\section{Orakel-Reduzierbarkeit}
+Ein Problem $A$ ist auf ein anderes Problem $B$ effizient Orakel reduzierbar 
+($A \preceq B$) falls es einen polynomialen Algorithmus gibt, der $A$ löst.
+Dieser Algorithmus  darf das Lösen von $B$ als Unterprogram nutzen, wobei
+die Komplexität von $B$ nicht in die Gesamtkomplexität einfließt.
+
