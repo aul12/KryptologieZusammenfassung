@@ -1,0 +1,92 @@
+\chapter{Moderne Kryptographie}
+\section{Diffie-Hellman-Schlüsselvereinbarung}
+\begin{enumerate}
+    \item
+        Primzahl \pub{$n$} und Primitivwurzel \pub{$a$}
+    \item
+        Alice wählt \priv{$x<n$}, Bob wählt \priv{$y<n$}
+    \item
+        Alice berechnet \pub{$\tilde{x} = a^x \mod n$},
+        Bob berechnet \pub{$\tilde{y} = a^y \mod n$}
+    \item Alice und Bob tauschen \pub{$\tilde{x}$} und \pub{$\tilde{y}$} aus.
+    \item
+        Alice berechnet \priv{$z = \tilde{y}^x \mod n$},
+        Bob berechnet \priv{$z = \tilde{x}^y \mod n$},
+    \item
+        \priv{$z$} kann als Schlüssel für ein klassisches Kryptoverfahren
+        genutzt werden.
+\end{enumerate}
+
+\section{No Key-System nach Shamir}
+\begin{enumerate}
+    \item
+        Primzahl \pub{$n$} wird gewählt. Alice hat Nachricht \priv{$m<n$}.
+    \item
+        Alice wählt Zufallszahl \priv{$a \in \mathbb{Z}_{n-1}^*$} 
+            und bestimmt \priv{$a^{-1} (\mod n-1)$}
+    \item
+        Alice schickt \pub{$c = m^a \mod n$} an Bob
+    \item
+        Bob wählt Zufallszahl \priv{$b \in \mathbb{Z}_{n-1}^*$}
+            und bestimmt \priv{$b^{-1} (\mod n-1)$}
+    \item
+        Bob sendet \pub{$c' = c^b \mod n$} an Alice zurück
+    \item
+        Alice berechnet \pub{$c'' = {c'}^{a^{-1}} \mod n$} und sendet
+        das wieder and Bob
+    \item
+        Bob berechnet \priv{$m = {c''}^{b^{-1}} \mod n$} und erhält
+        dadurch die Nachricht
+\end{enumerate}
+
+\section{RSA nach Rivest-Shamir-Adleman}
+Initialisierung:
+\begin{enumerate}
+    \item Jeder Teilnehmer wählt zwei Zufallsprimzahlen \priv{$p, q$}
+    \item Jeder Teilnehmer berchnet \pub{$n = p \cdot q$}
+    \item Es gilt \priv{$\varphi(n) = (p-1) \cdot (q-1)$}
+    \item Jeder Teilnehmer wählt eine Zufallszahl \pub{$e \in \mathbb{Z}_{\varphi(n)}^*$}
+    \item Der öffentliche Schlüssel ist \pub{$(n, e)$}
+    \item Jeder Teilnehmer wählt \priv{$d$} mit $d \cdot e \equiv 1 \mod \varphi(n)$
+        (z.B. mittels extggT)
+\end{enumerate}
+Verschlüsseln:
+\begin{enumerate}
+    \item Der Sender berechnet \pub{$c = m^e \mod n$} mit dem öffentlichen Schlüssel
+        des Empfängers
+    \item Der Empfänger berchnet \priv{$m = c^d \mod n$} mit seinem privaten Schlüssel
+        und erhält somit die Nachricht
+\end{enumerate}
+
+\section{ElGamal-Verfahren}
+Initialisierung:
+\begin{enumerate}
+    \item
+        Primzahl \pub{$n$} und Primitivwurzel \pub{$a \mod n$} wird gewählt
+    \item
+        Der Empfänger wählt eine Zufallszahl \priv{$y < n$}
+    \item
+        Der Empfänger berechnet \pub{$\tilde{y} = a^y \mod n$}
+\end{enumerate}
+Verschlüsseln:
+\begin{enumerate}
+    \item
+        Der Sender hat eine Nachricht \priv{$m<n$}
+    \item
+        Der Sender wählt eine Zufallszahl \priv{$x < n$}
+    \item
+        Der Sender berechnet \pub{$\tilde{x} = a^x \mod n$}
+    \item
+        Der Sender berechnet \priv{$z=\tilde{y}^x \mod n$}
+    \item
+        Der Sender verschlüsselt \priv{$m$} mit \priv{$z$} zu \pub{$c$}
+    \item
+        Der Sender sendet \pub{$(\tilde{x}, c)$}
+    \item
+        Der Empfänger berechnet \priv{$z=\tilde{x}^y$} und kann
+        damit $c$ entschlüsseln.
+\end{enumerate}
+Für die Verschlüsselung kann modulare Multiplikation oder XOr genutzt werden.
+
+Im Vergleich zu RSA kann der Schlüssel immer neu berechnet werden.
+
