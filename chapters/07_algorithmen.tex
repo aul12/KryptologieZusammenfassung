@@ -1,0 +1,98 @@
+\chapter{Algorithmen der Kryptographie}
+\section{Grundrechenarten}
+$k$ sei die Länge der Eingabezahlen
+\begin{itemize}
+    \item \textbf{Addition/Subtraktion:} $\mathcal{O}(k)$
+    \item \textbf{Multiplikation:} $\mathcal{O}(k^2)$
+    \item \textbf{Division:} $\mathcal{O}(k^2)$
+\end{itemize}
+
+\section{Euklid-Algorithmus}
+Laufzeit $\mathcal{O}(k^2)$.
+\begin{python}
+def ggT(a, b):
+    if b == 0:
+        return a
+    else:
+        return ggT(b, a % b)
+\end{python}
+
+\section{Erweiterter Euklid-Algorithmus}
+Außer $d = \text{ggT}(a, b)$ wird noch $x, y$ bestimmt mit $ax + by = d$.
+
+Laufzeit ebenfalls $\mathcal{O}(k^2)$.
+
+\begin{python}
+def extggT(a, b):
+    if b == 0:
+        return (a, 1, 0)
+    (d, x, y) = extggT(b, a % b)
+    return (d, y, x - (a // b) * y)
+\end{python}
+
+\section{Multiplikativ Inverses bestimmen}
+Sei $a \in \mathbb{Z}_n^*$, dann liefert $\text{extggT}(n, a) = (1, x, y)$. Hierbei
+ist $y$ das Multiplikativ inverse zu $a$.
+
+\section{Modulare Exponentiation}
+Es wird $a^b \mod n$ berechnet, $b = (b_k, \ldots, b1, b0)$ sei die Binärdarstellung von
+$b$.
+
+Laufzeit $\mathcal{O}(k^3)$.
+
+\begin{python}
+def modexp(a, b, n):
+    d = 1
+    for i in range(k, -1, -1):
+        d = (d * d) % n
+        if b_i == 1:
+            d = (d * a) % n
+    return d
+\end{python}
+
+\section{Chinesischer Restsatz-Algorithmus}
+Gegeben $n_1, n_2, \ldots, n_k$ und $a_1, a_2, \ldots, a_k$ wie oben beschrieben.
+Berechne $n = \prod_i n_i$, $m_i = \frac{n}{n_i}\ i \in \{1, \ldots, k\}$ und
+$y_i$ mit $m_i \cdot y_i \equiv 1 \mod n_i$.
+
+Dann gilt:
+\begin{equation}
+    x = \left( \sum_{i=1}^k a_i \cdot y_i \cdot m_i \right) \mod n
+\end{equation}
+
+\section{Miller-Rabin-Primzahltest}
+Bei Ausgabe 0 $n$ keine Primzahl, bei Ausgabe $1$ mit $75\%$ Wahrscheinlichkeit Primzahl.
+Durch wiederholtes Anwenden kann Wahrscheinlichkeite beliebig gesenkt werden.
+
+Laufzeit $\mathcal{O}{k^3}$.
+
+\begin{python}
+def primtest(n):
+    a = random.randint(1, n-1)
+    b = n-1 # Mit Bits b_k, ..., b_0
+    d = dd = 1
+    for i in range(k, -1, -1):
+        d = (d * d) % n
+        if d == 1 and dd != 1:
+            return 0
+        if b_i == 1:
+            d = (d*a) % n
+        dd = d
+\end{python}
+
+\section{Zufallsprimzahl herstellen}
+Es soll eine $k$-Bit Zufallsprimzahl hergestellt werden. Das erste und letzte Bit wird
+auf $1$ gesetzt \todo{wenn ich das erste Bit auf 1 setzte wird effektiv doch nur eine
+k-1 Bit Zufallsprimzahl hergestellt...} die restlichen $k-2$ Bits werden zufällig gewählt.
+Dann wird ein Primmzahltest durchgeführt.
+
+\section{Quadratische Reste modulo einer Primzahl}
+Sei $n$ eine Primzahl, dann kann mit dem Euler-Kriterium geprüft werden, ob $x$ ein
+quadratische Rest ist.
+
+Sofern der Test zutrifft sollen die Quadratwurzeln berechnet werden. Falls
+$n \equiv 3 \mod 4$ gilt geht das mit:
+\begin{python}
+def quadwurzel3(x, n):
+    return modexp(x, (n+1)/4, n)
+\end{python}
