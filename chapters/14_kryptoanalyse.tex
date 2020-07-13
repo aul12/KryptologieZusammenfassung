@@ -1,0 +1,43 @@
+\chapter{Algorithmen der Kryptoanalyse}
+\section{Pollard-$(p-1)$ (Faktorisierung)}
+\begin{python}
+def pollard_pminus1(n):
+    a = 2
+    B = 1
+    while True:
+        B += 1
+        a = modexp(a, B, n)
+        g = ggT(a-1, n)
+        if g > 1:
+            return g
+\end{python}
+
+\section{Pollard-$\rho$ (Faktorisierung)}
+Es gilt $f(x) = x^2 + 1 \mod n$.
+\begin{python}
+def pollard_rho(n):
+    x = random.randint(2, n-1)
+    y = x
+    while True:
+        x = f(x)
+        y = f(f(y))
+        g = ggT(x-y, n)
+        if g > 1:
+            return g
+\end{python}
+
+\section{Fermat-Faktorisierung}
+\begin{python}
+def fermat_faktor(n):
+    x = math.ceil(math.sqrt(n))
+    z = x * x - n
+    while x != n:
+        if z Quadratzahl mit y^2 = x:
+            return (x-y, x+y)
+        x *= y
+        z += 2*x +1
+\end{python}
+
+\section{Giant-Step-Baby-Step-Algorithmus (D-Log)}
+
+\section{Pollary-$\rho$ (D-Log)}

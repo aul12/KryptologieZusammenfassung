@@ -1,0 +1,12 @@
+\chapter{Aufteilen von Geheimnissen}
+Aus einem Hauptschlüssel $x$ sollen $n$ Teilschlüssel gewonnen werden, so dass
+sich aus beliebigen $k \leq n$ Teilschlüsseln wieder $x$ rekonstruieren lässt.
+
+\section{Schwellenwertsystem nach Shamir}
+$p$ sei eine Primzahl größer $x$ und $n$. $\mathbb{Z}_p$ ist ein Körper.
+Es werden $k-1$ Zufallszahlen $z_i$ bestimmt und daraus ein Polynom bestimmt:
+\begin{equation}
+    A(t) = x + \sum_{i=1}^{k-1} z_i \cdot t^i
+\end{equation}
+Die Geheimnisse sind nun $x_i = (i, A(i))$. Aus $k$ solcher Stützpunkte
+lässt sich das Polynom wieder eindeutig rekonstruieren.

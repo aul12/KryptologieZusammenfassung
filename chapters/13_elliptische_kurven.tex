@@ -1,0 +1,24 @@
+\chapter{Elliptische Kurven}
+Eine elliptische Kurve wird über einen Körper $\mathbb{K}$ und den Parametern
+$a, b$ definiert:
+\begin{equation}
+    E_{a, b} = \{(x, y) \in \mathbb{K}^2 | y^2 = x^3 + a \cdot x + b\}
+\end{equation}
+Diese Menge (mit $\mathcal{O}$, siehe unten) bildet bezüglich der Operation 
+$\diamond$ eine Gruppe. $\mathcal{O}$ ist das neutrale Element.
+
+Hierbei ist $P \diamond Q$ definiert als:
+\begin{itemize}
+    \item Es wird eine Gerade durch $P$ und $Q$ gelegt, diese schneidet die Kurve in
+        einem dritten Punkt $R$, durch spiegeln an der $x$ Achse erhalten wir $R'$
+        es gilt: $P \diamond Q = R'$.
+    \item Falls $P=Q$ wird nicht die Verbindungsgerade sondern die Tangente in $P$
+        genommen.
+    \item Falls $P$ und $Q$ senkrecht übereinander liegen so wird ein neuer Punkt
+        $\mathcal{O}$ eingeführt, dieser liegt im unendlichen.
+\end{itemize}
+
+
+Statt des diskreten Logarithmus können auch Operation auf elliptischen Kurven über
+$\mathbb{Z}_p$ mit $p$ Prim genutzt werden. Hierbei wird ein ähnliches Sicherheitsniveau
+bei kleineren Schlüsseln erreicht.
