@@ -39,5 +39,36 @@ def fermat_faktor(n):
 \end{python}
 
 \section{Giant-Step-Baby-Step-Algorithmus (D-Log)}
+Ausgangspunkt:
+\begin{equation}
+    y \cdot {(a^{-1})}^{x_2} = {\left(a^{\ceil{\sqrt{n}}}\right)}^{x_1}
+\end{equation}
+Mit $u=a^{-1}$ und $v=a^{\ceil{\sqrt{n}}}$ füllen wir die folgende Liste:
+\begin{equation}
+    L = \{(x_1, v_1^{x_1}) | x_1 = 0, \ldots \floor{\sqrt{n}} \}
+\end{equation}
+nun können wir ein $x_1, x_2$ paar und daraus $x$ bestimmen:
+\begin{python}
+    for x_2 in range(0, math.ceil(math.sqrt(n))):
+        if y * u**x_2 in L:
+            x_1, _ = L[y * u**x_2]
+            return (x_1 * math.ceil(math.sqrt(n)) + x_2)
+\end{python}
 
 \section{Pollary-$\rho$ (D-Log)}
+Wir erzeugen eine Pseudozufallssequenz $z_k = a^{i_k} y_{j_k}$, nach $\sqrt{n}$ Schritten
+finden wir (im Erwartungswert) ein paar $z_\mu = z_\sigma$. Da $y=a^x$ gilt muss dann gelten:
+\begin{equation}
+    i_\mu + j_\mu \cdot x = i_\sigma + j_\mu \cdot x
+\end{equation}
+woraus sich $x$ berechnen lässt. Für den Zufallsgenerator zerlege $M=\{0, \ldots, n-1\}$
+in drei (etwa) gleichgroße disjunkte Teilmengen $M_1, M_2, M_3$.
+Gegeben $z=a_i \cdot y_i$, dann wird je nach Menge in der $z$ ist unterschieden:
+\begin{enumerate}
+    \item
+        $i' = i + 1 \mod n-1$
+    \item
+        $j' = j + 1 \mod n-1$
+    \item
+        $i' = i \cdot 2 \mod n-1$ und $j' = j \cdot 2 \mod n-1$
+\end{enumerate}
