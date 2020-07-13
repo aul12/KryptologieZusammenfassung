@@ -1,0 +1,47 @@
+\chapter{Signaturen}
+Einer Nachricht $m$ wird eine Unterschrift $U$ von $A$ hinzugefügt, dabei muss gelten:
+\begin{itemize}
+    \item
+        Es soll überprüfbar sein, dass $u$ von $A$ erstellt wurde
+    \item
+        Nur $A$ soll solch eine Unterschrift herstellen können
+    \item
+        Das Dokument und die Unterschrift sollen nicht so abgeändert werden könnnen,
+        dass es ausssieht als ob ein anderes Dokument unterschrieben wurde
+\end{itemize}
+
+\section{Public Key-Infrastruktur}
+Wenn der Teilnehmer $A$ das Schlüsselpaar \pub{$k_A$}, \priv{$k_A'$} besitzt, so kann
+gelten:
+\begin{equation}
+    u = D(k_A', m)
+\end{equation}
+Hinweis: hier muss gelten $E(k_A, D(k_A', m)) = m$, also Verschlüsselung und 
+Entschlüsselung müssen vertauscht werden können, bei RSA ist das trivialerweise der
+Fall.
+
+\section{Kurze Unterschriften mit Hashing}
+Um Signaturen zu verkleinern kann statt $m$ auch $h(m)$, mit $h$ einer Hashfunktion,
+signiert werden. Die Hashfunktion sollte Kollisionsresistent sein.
+
+\section{Geburtstagsproblem}
+Angriffe die Kollisionen erreichen wollen sind effizienter als erwartet, bei $n$ möglichen
+Hashwerten müssen nur circa $\sqrt{n}$ Nachrichten getestet werden bis im Erwartungswert
+die erste Kollision auftritt.
+
+Also muss der Hash entsprechend mindestens doppelt so lang wie das geforderte 
+Sicherheitsniveau sein.
+
+\section{Blinde Unterschrift mit RSA}
+Problem: Bob soll Dokument von Alice unterschreiben, ohne das Dokument zu sehen.
+
+\begin{itemize}
+    \item
+        Alice wählt Zufallszahl \priv{$z \in \mathbb{Z}_n^*$} und verblendet
+        \priv{$m$} zu \pub{$m' = z^e \cdot m \mod n$}. \pub{$(e, n)$} ist Bobs
+        öffentlicher Schlüssel.
+    \item
+        Bob unterschreibt, berechnet also \pub{${(m')}^d \mod n$} mit seinem
+        privaten Schlüssel \priv{$d$}.
+    \item Alice multipliziert mit \priv{$z^{-1}$} und erhält $u=m^d \mod n$
+\end{itemize}
