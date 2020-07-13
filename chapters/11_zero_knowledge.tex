@@ -1,0 +1,66 @@
+\chapter{Zero Knowledge}
+Ziel: Der Prover $P$ soll dem Verifier $V$ zeigen, dass er $x
+$ (mit öffentlichem Gegenstück $\tilde{x}$) kennt ohne $x$ oder Informationen darüber 
+zu Veröffentlichen.
+
+Typischerweise funktioniert das Verfahren in drei Phase: Commitment, Challenge und 
+Response. Die Wahrscheinlichkeit das ein betrügerischer Prover erkannt wird beträgt
+$1/2$ die Fehlerwahrscheinlichkeit lässt sich durch Wiederholung beliebig drücken.
+
+\section{Definition}
+Sei $(N_1, \ldots, N_k)$ Zufallsvariablen, die die Kommunikationssequenz repräsentieren.
+Falls ein effizienter probabilistischer Algorithmus $S$ (Simulator) existiert der 
+ebenfalls solche Sequenzen produziert (gleiche Verteilung) ohne $x$ zu kennen,
+dann ist das Protkoll ein Zero Knowledge-Protokoll.
+
+\section{Graphisomorphie}
+\begin{enumerate}
+    \item
+        $P$ erzeugt einen (großen) Zufallsgraphen \pub{$G_0$} sowie
+        eine Permutation \priv{$\pi$}. Und berechnet damit \pub{$G_1 = \pi(G_0)$}.
+    \item
+        Mit einer weiteren Zufallspermutation \priv{$\sigma$} erzeugt $P$
+        \pub{$H = \sigma{G_1}$}, dieser wird an $V$ gesendet (Commitment).
+    \item
+        $V$ antwortet mit einem Zufallsbit \pub{$b \in \{0, 1\}$} (Challenge).
+    \item
+        $P$ antwortet mit der Permutation, die $G_b$ nach $H$ überführt. Also
+        \pub{$\sigma$} falls $b=1$ und \pub{$\pi \circ \sigma$} falls $b=0$.
+        $V$ überprüft die Permutation.
+\end{enumerate}
+
+\section{Zero Knowledge basierend auf einer Einwegfunktion}
+Wenn eine Einwegfunktion $f$ und zwei Rechenoperationen $\circ$ und $\diamond$ existieren,
+so dass
+\begin{equation}
+    f(x \circ y) = f(x) \diamond f(y)
+\end{equation}
+dann kann daraus ein Zero-Knowledge Protokoll konstruiert werden:
+
+\begin{enumerate}
+    \item Initialisierung:
+        $P$ wählt \priv{$x$} und berechnet \pub{$\tilde{x} = f(x)$}.
+    \item Commitment:
+        $P$ wählt \priv{$y$} und sendet \pub{$\tilde{y} = f(y)$} an $V$.
+    \item Challenge:
+        $V$ wählt ein Zufallsbit \pub{$b$} und sendet dieses an $P$.
+    \item Response:
+        
+        Falls $b=0$: P sendet \pub{$y$}, es wird überprüft $f(y) = \tilde{y}$.
+
+        Falls $b=1$: P sendet \pub{$z=x \circ y$}, es wird überprüft 
+        $f(z) = \tilde{x} \diamond \tilde{y}$.
+\end{enumerate}
+
+\subsection{Exponentiation/Diskreter Logarithmus}
+\begin{equation}
+    f(x) = a^x \mod n
+\end{equation}
+$n$ Primzahl, $a$ Primitivwurzel. $\circ$ entspricht der Addition $\mod n-1$, und
+$\diamond$ die Multiplikation $\mod n$.
+
+\subsection{Quadrieren/Quadratwurzelziehen (Fiat-Shamir)}
+\begin{equation}
+    f(x) = x^2 \mod n
+\end{equation}
+mit $n=p \cdot q$ geheimen Primzahlen. $\circ$ und $\diamond$ sind Multiplikation $\mod n$.
