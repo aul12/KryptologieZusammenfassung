@@ -42,6 +42,13 @@ Falls eine Gruppe zyklisch ist so existieren $\phi(\phi(n))$ Primitivwurzeln.
 Allgemein ist $<a> = \{a, \ldots, a^{\abs{G}}\}$ eine Untergruppe von $G$, 
 $\abs{<a>}$ ist die Ordnung von $a$.
 
+\section{Primitivwurzel-Kriterium}
+Sei $n$ Primzahl, dann ist $a$ genau dann Primitivwurzel, falls
+\begin{equation}
+    a^{\frac{n-1}{q}} \neq 1
+\end{equation}
+für alle Primzahlen $q$ die $n-1$ teilen.
+
 \section{Exponentiation und diskreter Logarithmus}
 Sei $\mathbb{Z}_n^*$ eine zyklische Gruppe und $a$ Primitivwurzel, dann existiert
 für jedes $x \in \mathbb{Z}_n^*$ ein eindeutiger Exponent $k$ mit $a^k = x$.
